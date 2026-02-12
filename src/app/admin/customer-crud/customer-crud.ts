@@ -15,7 +15,6 @@ export class CustomerCrudComponent implements OnInit {
 
   customers: any[] = [];
 
-  // form model
   formCustomer = {
     id: null,
     name: '',
