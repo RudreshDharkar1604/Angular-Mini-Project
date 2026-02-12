@@ -1,0 +1,18 @@
+
+<div class="card">
+  <h2>Login</h2>
+
+  <form [formGroup]="loginForm" (ngSubmit)="login()">
+    <input formControlName="email" placeholder="Email" />
+    <input type="password" formControlName="password" placeholder="Password" />
+
+    <select formControlName="role">
+      <option value="user">Customer</option>
+      <option value="admin">Admin</option>
+    </select>
+
+    <button type="submit">Login</button>
+  </form>
+
+
+</div>

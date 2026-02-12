@@ -1,0 +1,15 @@
+<nav class="navbar">
+  <div class="logo">MyBank</div>
+
+  <div class="links">
+    <a routerLink="/">Home</a>
+
+    <a *ngIf="!isLoggedIn" routerLink="/login">Login</a>
+    <a *ngIf="!isLoggedIn" routerLink="/register">Register</a>
+
+    <a *ngIf="role === 'customer'" routerLink="/customer">Dashboard</a>
+    <a *ngIf="role === 'admin'" routerLink="/admin">Admin</a>
+
+    <button *ngIf="isLoggedIn" (click)="logout()">Logout</button>
+  </div>
+</nav>

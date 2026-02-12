@@ -1,0 +1,59 @@
+<div class="card">
+  <p>Customers count: {{ customers.length }}</p>
+
+  <h2>Customer Management</h2>
+
+  <h3 *ngIf="!isEditMode">Add Customer</h3>
+  <h3 *ngIf="isEditMode">Edit Customer</h3>
+
+  <input [(ngModel)]="formCustomer.name" placeholder="Name" />
+  <input [(ngModel)]="formCustomer.email" placeholder="Email" />
+  <input [(ngModel)]="formCustomer.password" placeholder="Password" />
+
+  <select [(ngModel)]="formCustomer.role">
+    <option value="customer">Customer</option>
+    <option value="admin">Admin</option>
+  </select>
+
+  <!-- ADD BUTTON -->
+  <button *ngIf="!isEditMode" (click)="addCustomer()">
+    Add Customer
+  </button>
+
+  <!-- UPDATE BUTTON -->
+  <button *ngIf="isEditMode" (click)="updateCustomer()">
+    Update Customer
+  </button>
+
+  <button *ngIf="isEditMode" (click)="resetForm()">
+    Cancel
+  </button>
+
+  <hr />
+
+  <h3>Customer List</h3>
+
+  <table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let c of customers">
+      <td>{{ c.name }}</td>
+      <td>{{ c.email }}</td>
+      <td>{{ c.role }}</td>
+      <td>
+        <button (click)="editCustomer(c)">Edit</button>
+        <button (click)="deleteCustomer(c.id)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
