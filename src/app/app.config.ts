@@ -5,14 +5,15 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
-import { authFeature, authFeatureKey } from './auth/auth.reducer';
+import { authReducer } from './auth/auth.reducer';
+import { AuthEffects } from './auth/auth.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes),
     provideHttpClient(),
     provideStore(),
-    provideState(authFeature),
-    provideEffects(),
+    provideState({ name: 'auth', reducer: authReducer }),
+    provideEffects([AuthEffects]),
   ],
 };

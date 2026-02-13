@@ -1,19 +1,39 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-
-import { concatMap } from 'rxjs/operators';
-import { Observable, EMPTY } from 'rxjs';
-import { AuthActions } from './auth.actions';
+import { AuthService } from '../services/auth';
+import * as AuthActions from './auth.actions';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class AuthEffects {
-  loadAuths$ = createEffect(() => {
-    return this.actions$.pipe(
-      // ofType(AuthActions.loadAuths),
-      /** An EMPTY observable only emits completion. Replace with your own observable API request */
-      concatMap(() => EMPTY as Observable<{ type: string }>),
-    );
-  });
+  constructor(
+    private actions$: Actions,
+    private authService: AuthService,
+  ) {}
 
-  constructor(private actions$: Actions) {}
+  login$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.login),
+
+      switchMap(({ email, password, role }) =>
+        this.authService.login({ email, password, role }).pipe(
+          map((res: any) =>
+            AuthActions.loginSuccess({
+              token: res.token,
+              role: res.role,
+            }),
+          ),
+
+          catchError((err) =>
+            of(
+              AuthActions.loginFailure({
+                error: err?.error || 'Login failed',
+              }),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }

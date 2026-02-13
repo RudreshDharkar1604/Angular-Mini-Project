@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { loadingSelector } from '../../auth/auth.selectors';
+import { selectError, selectLoading, selectRole } from '../../auth/auth.selectors';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,8 +11,12 @@ import { Observable } from 'rxjs';
   templateUrl: './admin-dashboard.html',
 })
 export class AdminDashboardComponent {
-  loading: Observable<boolean>;
+  loading$: Observable<boolean>;
+  error$: Observable<string | null>;
+  role$: Observable<string | null>;
   constructor(private store: Store) {
-    this.loading = this.store.select(loadingSelector);
+    this.loading$ = this.store.select(selectLoading);
+    this.error$ = this.store.select(selectError);
+    this.role$ = this.store.select(selectRole);
   }
 }
