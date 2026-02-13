@@ -1,8 +1,7 @@
-
 <div class="card">
   <h2>Admin Dashboard</h2>
-
+  @if (loading) {
+    <h1>loading...</h1>
+  }
   <a routerLink="/admin/customers">Manage Customers</a>
-
-  
 </div>

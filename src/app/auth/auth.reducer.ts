@@ -10,7 +10,7 @@ export interface State {
 
 export const initialState: State = {
   user: null,
-  loading: false,
+  loading: true,
 };
 
 export const reducer = createReducer(

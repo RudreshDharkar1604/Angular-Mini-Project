@@ -7,14 +7,11 @@ import { AuthActions } from './auth.actions';
 
 @Injectable()
 export class AuthEffects {
-
-
   loadAuths$ = createEffect(() => {
     return this.actions$.pipe(
-
-      ofType(AuthActions.loadAuths),
+      // ofType(AuthActions.loadAuths),
       /** An EMPTY observable only emits completion. Replace with your own observable API request */
-      concatMap(() => EMPTY as Observable<{ type: string }>)
+      concatMap(() => EMPTY as Observable<{ type: string }>),
     );
   });
 
