@@ -63,8 +63,11 @@ export class LoginComponent {
     //     this.errorMessage = err.error?.detail || err.error?.message || 'Invalid email or password';
     //   },
     // });
+    
+  
     const { email, password, role } = this.loginForm.value;
-
+    console.log(email,password,role);
+    
     this.store.dispatch(login({ email, password, role }));
   }
 }
